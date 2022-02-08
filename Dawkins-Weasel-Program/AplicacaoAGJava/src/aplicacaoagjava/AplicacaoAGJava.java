@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package aplicacaoagjava;
 
 import aplicacaoagjava.classes.WParent;
@@ -20,9 +16,8 @@ public class AplicacaoAGJava {
                 TARGET = arg;
             }else{
                 System.out.println("Argumento["+arg+"] não é válido");
-            }
-                
-            }
+            }   
+        }
         runWeasel();
     }
     
@@ -42,27 +37,27 @@ public class AplicacaoAGJava {
         int generations = 1;
         int bestAccuracy = theParent.accuracy();
         
-        JOptionPane.showConfirmDialog(null, "Geração:"+generations+"|"+"Pontuação:"+bestAccuracy+"Genoma: "+theParent.getGenome());
+        System.out.println("Geração:"+generations+"|"+"Pontuação:"+bestAccuracy+"Genoma: "+theParent.getGenome());
         
         while(bestAccuracy< TARGET.length()){
             generations++;
-        }
+        
         
         for(int i =0; i<NEW_WEASELS;i++){
             offspring[i] = new WParent (theParent.getGenome());
         }
-        
         theParent = offspring[0];
         bestAccuracy = offspring[0].accuracy();
         for(int i =1;i<NEW_WEASELS; i++){
             if(offspring[i].accuracy()> bestAccuracy){
-                
+                theParent = offspring[i];
+                bestAccuracy = offspring[i].accuracy();
             }
+            
         }
-        
-        
+        System.out.println("Geração:"+generations+"|"+"Pontuação:"+bestAccuracy+"Genoma: "+theParent.getGenome());
+          
     }
-    
-    
-    
+    System.out.println("O macaco foi");
+    }
 }
