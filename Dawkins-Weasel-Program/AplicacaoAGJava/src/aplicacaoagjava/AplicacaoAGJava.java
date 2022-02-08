@@ -4,44 +4,50 @@
  */
 package aplicacaoagjava;
 
-import aplicacaoagjava.classes.Algoritmo;
-import aplicacaoagjava.classes.Monkey;
+import aplicacaoagjava.classes.WParent;
 
 
-/**
- *
- * @author danysimas
- */
-
+import javax.swing.JOptionPane;
 public class AplicacaoAGJava {
     
     public static void main(String[] args) {
-       
-        Monkey monkey = new Monkey();
         
-        Algoritmo algorimto = new Algoritmo();
+        for(String arg: args){
+            arg =arg.toUpperCase();
+            if(arg.matches("^[0-9]+$")){
+                NEW_WEASELS = Integer.parseInt(arg);
+            }else if(arg.matches("^["+GENES+"]+$")){
+                TARGET = arg;
+            }else{
+                System.out.println("Argumento["+arg+"] não é válido");
+            }
+                
+            }
+        runWeasel();
+    }
+    
+    public static String TARGET="METHNKS IT IS LIKE A WEASEL";
+    
+    public static String GENES = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    
+    public static double MUTATION_RATE = 0.05;
+    
+    public static int NEW_WEASELS = 50;
+    
+    public void runWeasel(){
+        System.out.println("COMEÇANDO");
         
+        WParent theParent = new WParent(TARGET.length());
+        WParent [] offspring = new WParent[NEW_WEASELS];
+        int generations = 1;
+        int bestAccuracy = theParent.accuracy();
         
-       
-        monkey.setPhrase(algorimto.DarwinMonkey());
+        JOptionPane.showConfirmDialog(null, "Geração:"+generations+"|"+"Maior precisão");
         
-        //System.out.println(monkey.getPhrase());
-        
-        char [] m = monkey.getPhrase();
-        
-        //System.out.println(m);
-        
-        System.out.println(monkey.getPhrase() != algorimto.TARGET);
-        
-        algorimto.DarwinTEST(monkey);
-        
-        
-        
-        
-      
         
         
     }
+    
     
     
 }
