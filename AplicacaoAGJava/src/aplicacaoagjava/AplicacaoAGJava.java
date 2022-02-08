@@ -4,13 +4,28 @@
  */
 package aplicacaoagjava;
 
+import aplicacaoagjava.classes.Monkey;
+
+
 /**
  *
  * @author danysimas
  */
+
 public class AplicacaoAGJava {
+    
     public static void main(String[] args) {
-        // TODO code application logic here
+       
+        Monkey monkey = new Monkey();
+        
+        
+        
+        
+        
+        
+        
+        
     }
+    
     
 }
