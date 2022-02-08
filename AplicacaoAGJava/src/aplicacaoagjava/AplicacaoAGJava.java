@@ -4,6 +4,7 @@
  */
 package aplicacaoagjava;
 
+import aplicacaoagjava.classes.Algoritmo;
 import aplicacaoagjava.classes.Monkey;
 
 
@@ -18,11 +19,15 @@ public class AplicacaoAGJava {
        
         Monkey monkey = new Monkey();
         
+        Algoritmo algorimto = new Algoritmo();
+        
+       
+        monkey.setPhrase(algorimto.DarwinMonkey());
+        
+        algorimto.DarwinTEST(monkey);
         
         
-        
-        
-        
+      
         
         
     }

@@ -1,6 +1,8 @@
 
 package aplicacaoagjava.classes;
 
+import java.util.Vector;
+
 /**
  *
  * @author danysimas
@@ -8,21 +10,18 @@ package aplicacaoagjava.classes;
 
 
 public class Monkey {
-    String phrase;
-
-    public Monkey(){};
+   
     
-    public String getPhrase() {
+    char[] phrase = new char[29];
+    
+    public Monkey(){};
+
+    public char[] getPhrase() {
         return phrase;
     }
 
-    public void setPhrase(String phrase) {
+    public void setPhrase(char[] phrase) {
         this.phrase = phrase;
     }
 
-    public Monkey(String phrase) {
-        this.phrase = phrase;
-    }
-    
-  
 }
