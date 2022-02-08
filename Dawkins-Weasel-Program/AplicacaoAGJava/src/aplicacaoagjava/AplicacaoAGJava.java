@@ -21,10 +21,21 @@ public class AplicacaoAGJava {
         
         Algoritmo algorimto = new Algoritmo();
         
+        
        
         monkey.setPhrase(algorimto.DarwinMonkey());
         
+        //System.out.println(monkey.getPhrase());
+        
+        char [] m = monkey.getPhrase();
+        
+        //System.out.println(m);
+        
+        System.out.println(monkey.getPhrase() != algorimto.TARGET);
+        
         algorimto.DarwinTEST(monkey);
+        
+        
         
         
       
