@@ -34,7 +34,7 @@ public class AplicacaoAGJava {
     
     public static int NEW_WEASELS = 50;
     
-    public void runWeasel(){
+    public  static void runWeasel(){
         System.out.println("COMEÇANDO");
         
         WParent theParent = new WParent(TARGET.length());
@@ -42,8 +42,23 @@ public class AplicacaoAGJava {
         int generations = 1;
         int bestAccuracy = theParent.accuracy();
         
-        JOptionPane.showConfirmDialog(null, "Geração:"+generations+"|"+"Maior precisão");
+        JOptionPane.showConfirmDialog(null, "Geração:"+generations+"|"+"Pontuação:"+bestAccuracy+"Genoma: "+theParent.getGenome());
         
+        while(bestAccuracy< TARGET.length()){
+            generations++;
+        }
+        
+        for(int i =0; i<NEW_WEASELS;i++){
+            offspring[i] = new WParent (theParent.getGenome());
+        }
+        
+        theParent = offspring[0];
+        bestAccuracy = offspring[0].accuracy();
+        for(int i =1;i<NEW_WEASELS; i++){
+            if(offspring[i].accuracy()> bestAccuracy){
+                
+            }
+        }
         
         
     }
