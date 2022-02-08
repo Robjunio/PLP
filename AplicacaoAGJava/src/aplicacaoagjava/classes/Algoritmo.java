@@ -1,11 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package aplicacaoagjava.classes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.Vector;
 
 /**
  *
@@ -17,7 +15,7 @@ public class Algoritmo {
     int generation = 0;
     int bigScore;
     public static final String TARGET = "TARGET \"METHINKS IT IS LIKE A WEASEL";
-    public static final String ALPHABERT = " ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    char  ALPHABERT[]= { ' ','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
 
     public int getScore() {
         return score;
@@ -45,12 +43,22 @@ public class Algoritmo {
     
     
     private void DarwinTEST(Monkey monkey){
-        List <Monkey> monkeys = new ArrayList<Monkey>(29);
+        Random random = new Random();
+        ArrayList <Monkey> monkeys = new ArrayList<>();
         while(monkey.getPhrase().equals(TARGET)){
+           for (int i =0; i<monkeys.size();i++) {
+              monkeys.get(i).setPhrase(monkey.getPhrase());
+              for(int j =0; j<29; j++){
+                  if(random.nextInt(101)<=5){
+                      
+                      
+                  }
+                  
+             }
+               
             
-        }
-        for (Monkey monkey1 : monkeys) {
-            monkey1.setPhrase(monkey.getPhrase());
+           }
+        
         }
         
         
