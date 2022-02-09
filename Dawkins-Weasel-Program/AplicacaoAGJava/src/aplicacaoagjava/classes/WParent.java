@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package aplicacaoagjava.classes;
 /**
  *
@@ -34,7 +30,10 @@ public class WParent {
      public int accuracy(){
          int accuracyScore =0;
          for(int i=0; i<aplicacaoagjava.AplicacaoAGJava.TARGET.length(); i++){
-             accuracyScore++;
+             if(aplicacaoagjava.AplicacaoAGJava.TARGET.charAt(i)==genome.charAt(i)){
+                 accuracyScore++;
+             }
+             
          }
          return accuracyScore;
      }
