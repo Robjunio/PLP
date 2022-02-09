@@ -42,14 +42,15 @@ public class AplicacaoAGJava {
    public static int NEW_WEASELS = 0;
     
     public  static void runWeasel(){
-        System.out.println("COMEÇANDO");
+        JOptionPane.showMessageDialog (null, "COMEÇANDO");
 
         WParent theParent = new WParent(TARGET.length());
         WParent [] offspring = new WParent[NEW_WEASELS];
         int generations = 1;
         int bestAccuracy = theParent.accuracy();
 
-        System.out.println("Geração:"+ generations +"|"+"Pontuação:"+ bestAccuracy+" Genoma: "+ theParent.getGenome() );        //loop para nova geração de individuos, pai e filho
+        JOptionPane.showMessageDialog (null, "Geração:"+ generations +"|"+"Pontuação:"+ bestAccuracy+" Genoma: "+ theParent.getGenome());
+        //loop para nova geração de individuos, pai e filho
         while(bestAccuracy < TARGET.length()){
             generations++; 
             for(int i =0; i<NEW_WEASELS;i++){
@@ -63,7 +64,8 @@ public class AplicacaoAGJava {
                    bestAccuracy = offspring[i].accuracy();
                 }
             }
-            System.out.println("Geração:"+ generations + "|"+ "Pontuação:" + bestAccuracy+ "|"+" Genoma: "+theParent.getGenome());
+            JOptionPane.showMessageDialog (null, "Geração:"+ generations + "|"+ "Pontuação:" + bestAccuracy+ "|"+" Genoma: "+theParent.getGenome());
     }
-        System.out.println("O macaco foi gerada em "+generations+ " gerações");    }
+        JOptionPane.showMessageDialog (null, "O macaco foi gerada em "+generations+ " gerações");
+    }
 }
