@@ -3,17 +3,21 @@ package aplicacaoagjava;
 import aplicacaoagjava.classes.WParent;
 import java.util.Scanner;
 
-import java.swing;
+
+import javax.swing.JOptionPane;
 
 public class AplicacaoAGJava {
     
+    //Main
     public static void main(String[] args) {
+         //Declarando o scanner para ler os valores
         Scanner scan = new Scanner(System.in);
         
         TARGET = scan.nextLine();
         
         NEW_WEASELS = scan.nextInt();
         
+        //Verificação dos argumentos
         for(String arg: args){
             arg =arg.toUpperCase();
             if(arg.matches("^[0-9]+$")){
@@ -29,7 +33,7 @@ public class AplicacaoAGJava {
             }   
         }
         
-        
+         //Metodo principal AG
         runWeasel();
     }
     
@@ -49,13 +53,14 @@ public class AplicacaoAGJava {
         int generations = 1;
         int bestAccuracy = theParent.accuracy();
 
-        JOptionPane.showMessageDialog (null, "Geração:"+ generations +"|"+"Pontuação:"+ bestAccuracy+" Genoma: "+ theParent.getGenome());
+        System.out.println("Geração:"+ generations +"|"+"Pontuação:"+ bestAccuracy+" Genoma: "+ theParent.getGenome());
         //loop para nova geração de individuos, pai e filho
         while(bestAccuracy < TARGET.length()){
             generations++; 
             for(int i =0; i<NEW_WEASELS;i++){
                 offspring[i] = new WParent (theParent.getGenome());
             }
+            //Verificação de melhor resultado de geração de filhos
             theParent = offspring[0];
             bestAccuracy = offspring[0].accuracy();
             for(int i =1;i<NEW_WEASELS; i++){
@@ -64,8 +69,8 @@ public class AplicacaoAGJava {
                    bestAccuracy = offspring[i].accuracy();
                 }
             }
-            JOptionPane.showMessageDialog (null, "Geração:"+ generations + "|"+ "Pontuação:" + bestAccuracy+ "|"+" Genoma: "+theParent.getGenome());
-    }
-        JOptionPane.showMessageDialog (null, "O macaco foi gerada em "+generations+ " gerações");
+            System.out.println("Geração:"+ generations + "|"+ "Pontuação:" + bestAccuracy+ "|"+" Genoma: "+theParent.getGenome());
+        }
+        JOptionPane.showMessageDialog (null, "O macaco foi gerado em: "+ generations+"°geração");
     }
 }
