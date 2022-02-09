@@ -3,22 +3,14 @@ package aplicacaoagjava;
 import aplicacaoagjava.classes.WParent;
 import java.util.Scanner;
 
-
-import javax.swing.JOptionPane;
-
+import java.swing;
 
 public class AplicacaoAGJava {
     
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         
-        System.out.println("SOLUÇÃO:");
-        
-        
         TARGET = scan.nextLine();
-        
-        System.out.println("NÚMERO DE CÓPIAS: ");
-
         
         NEW_WEASELS = scan.nextInt();
         
@@ -57,7 +49,7 @@ public class AplicacaoAGJava {
         int generations = 1;
         int bestAccuracy = theParent.accuracy();
 
-        System.out.println ("Geração:"+ generations +"|"+"Pontuação:"+ bestAccuracy+" Genoma: "+ theParent.getGenome());
+        JOptionPane.showMessageDialog (null, "Geração:"+ generations +"|"+"Pontuação:"+ bestAccuracy+" Genoma: "+ theParent.getGenome());
         //loop para nova geração de individuos, pai e filho
         while(bestAccuracy < TARGET.length()){
             generations++; 
@@ -72,8 +64,8 @@ public class AplicacaoAGJava {
                    bestAccuracy = offspring[i].accuracy();
                 }
             }
-            System.out.println("Geração:"+ generations + "|"+ "Pontuação:" + bestAccuracy+ "|"+" Genoma: "+theParent.getGenome());
+            JOptionPane.showMessageDialog (null, "Geração:"+ generations + "|"+ "Pontuação:" + bestAccuracy+ "|"+" Genoma: "+theParent.getGenome());
     }
-        JOptionPane.showMessageDialog (null, "O macaco foi gerado em "+generations+ " geração");
+        JOptionPane.showMessageDialog (null, "O macaco foi gerada em "+generations+ " gerações");
     }
 }
