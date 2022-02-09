@@ -3,19 +3,17 @@ package aplicacaoagjava;
 import aplicacaoagjava.classes.WParent;
 import java.util.Scanner;
 
+import java.swing;
+
 public class AplicacaoAGJava {
-
-    //Main
+    
     public static void main(String[] args) {
-
-        //Declarando o scanner para ler os valores
         Scanner scan = new Scanner(System.in);
-
+        
         TARGET = scan.nextLine();
         
         NEW_WEASELS = scan.nextInt();
-
-        //Verificação dos argumentos
+        
         for(String arg: args){
             arg =arg.toUpperCase();
             if(arg.matches("^[0-9]+$")){
@@ -31,12 +29,10 @@ public class AplicacaoAGJava {
             }   
         }
         
-        //Metodo principal AG
+        
         runWeasel();
     }
-
-    //Declaração das variaveis estaticas
-
+    
    public static  String TARGET="";
     
    public static String GENES = " ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -44,8 +40,7 @@ public class AplicacaoAGJava {
    public static double MUTATION_RATE = 0.05;
     
    public static int NEW_WEASELS = 0;
-
-    //Codigo de AG
+    
     public  static void runWeasel(){
         System.out.println("COMEÇANDO");
 
@@ -60,8 +55,6 @@ public class AplicacaoAGJava {
             for(int i =0; i<NEW_WEASELS;i++){
                 offspring[i] = new WParent (theParent.getGenome());
             }
-
-            //Verificação de melhor resultado de geração de filhos
             theParent = offspring[0];
             bestAccuracy = offspring[0].accuracy();
             for(int i =1;i<NEW_WEASELS; i++){
@@ -70,7 +63,6 @@ public class AplicacaoAGJava {
                    bestAccuracy = offspring[i].accuracy();
                 }
             }
-
             System.out.println("Geração:"+ generations + "|"+ "Pontuação:" + bestAccuracy+ "|"+" Genoma: "+theParent.getGenome());
     }
         System.out.println("O macaco foi gerada em "+generations+ " gerações");    }
