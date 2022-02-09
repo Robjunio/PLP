@@ -3,8 +3,6 @@ package aplicacaoagjava;
 import aplicacaoagjava.classes.WParent;
 import java.util.Scanner;
 
-import java.swing;
-
 public class AplicacaoAGJava {
 
     //Main
@@ -49,15 +47,14 @@ public class AplicacaoAGJava {
 
     //Codigo de AG
     public  static void runWeasel(){
-        JOptionPane.showMessageDialog (null, "COMEÇANDO");
-        
+        System.out.println("COMEÇANDO");
+
         WParent theParent = new WParent(TARGET.length());
         WParent [] offspring = new WParent[NEW_WEASELS];
         int generations = 1;
         int bestAccuracy = theParent.accuracy();
 
-        JOptionPane.showMessageDialog (null, "Geração:"+ generations +"|"+"Pontuação:"+ bestAccuracy+" Genoma: "+ theParent.getGenome());
-        //loop para nova geração de individuos, pai e filho
+        System.out.println("Geração:"+ generations +"|"+"Pontuação:"+ bestAccuracy+" Genoma: "+ theParent.getGenome() );        //loop para nova geração de individuos, pai e filho
         while(bestAccuracy < TARGET.length()){
             generations++; 
             for(int i =0; i<NEW_WEASELS;i++){
@@ -74,9 +71,7 @@ public class AplicacaoAGJava {
                 }
             }
 
-            JOptionPane.showMessageDialog (null, "Geração:"+ generations + "|"+ "Pontuação:" + bestAccuracy+ "|"+" Genoma: "+theParent.getGenome());
-             
+            System.out.println("Geração:"+ generations + "|"+ "Pontuação:" + bestAccuracy+ "|"+" Genoma: "+theParent.getGenome());
     }
-        JOptionPane.showMessageDialog (null, "O macaco foi gerada em "+generations+ " gerações");
-    }
+        System.out.println("O macaco foi gerada em "+generations+ " gerações");    }
 }
