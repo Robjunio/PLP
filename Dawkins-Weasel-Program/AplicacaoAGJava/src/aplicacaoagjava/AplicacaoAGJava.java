@@ -13,8 +13,10 @@ public class AplicacaoAGJava {
          //Declarando o scanner para ler os valores
         Scanner scan = new Scanner(System.in);
         
+        System.out.println("SOLUÇÃO:");
         TARGET = scan.nextLine();
         
+        System.out.println("NÚMEROS DE CÓPIAS:");
         NEW_WEASELS = scan.nextInt();
         
         //Verificação dos argumentos
