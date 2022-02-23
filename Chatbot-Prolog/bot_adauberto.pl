@@ -1,31 +1,36 @@
 :- initialization(bot_adauberto).
 
+% Função recursiva para a leitura e processamento da entrada do usuário.
 
 talk :-
-    nl,
+    nl, % Quebra de linha.
     read(Question),
     process(Question).
+    
 
-
+% Função de Parada ao inserir o comando stop;
 process(stop) :- 
     write('- Adaubertinho: Foi bom falar com você, até a próxima!').
+    
 
-
+% Função que verifica a entrada e lhe procura no banco de dados.
 process(Question) :-
-    check_for(Question, Answer), !,
+    check_for(Question, Answer), !, % Função que compara o banco de dados.
     write('- Adaubertinho: '),
     write(Answer), nl,
 
     write('- Adaubertinho: Posso te ajudar com mais algo?'), nl,
     talk.
+    
 
-
+% Função que retorna caso a entrada nao seja encontrada no banco de dados.
 process(_) :-
     write('Não tenho uma resposta para isso ;-;'), nl,
     write('Desculpa por não poder ajuda-lo, mas teria mais alguma dúvida?'), nl,
     talk.
+    
 
-
+% Main.
 bot_adauberto :- 
     write('Olá, sou o Adaubertinho! Quando quiser parar de conversar, escreva stop.'), nl,
     write('Quais suas dúvidas sobre as atividades de MPS?'), nl, 
