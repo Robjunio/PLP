@@ -8,7 +8,7 @@ talk :-
 
 
 process(stop) :- 
-    write('- Adaubertinho: Foi bom falar com você, até a próxima!'), !.
+    write('- Adaubertinho: Foi bom falar com você, até a próxima!').
 
 
 process(Question) :-
@@ -21,8 +21,14 @@ process(Question) :-
 
 
 process(_) :-
-    write('Não tenho uma resposta para isso. ;-;'), nl,
+    write('Não tenho uma resposta para isso ;-;'), nl,
     write('Desculpa por não poder ajuda-lo, mas teria mais alguma dúvida?'), nl,
+    talk.
+
+
+bot_adauberto :- 
+    write('Olá, sou o Adaubertinho! Quando quiser parar de conversar, escreva stop.'), nl,
+    write('Quais suas dúvidas sobre as atividades de MPS?'), nl, 
     talk.
 
 
@@ -64,10 +70,3 @@ check_for('Quando são as aulas do professor?', 'MPS é às terças e quintas à
 check_for('Quando sao as aulas do professor?', 'MPS é às terças e quintas às 18h e PLP é às quartas às 14:40!').
 check_for('quando são as aulas do professor?', 'MPS é às terças e quintas às 18h e PLP é às quartas às 14:40!').
 check_for('quando sao as aulas do professor?', 'MPS é às terças e quintas às 18h e PLP é às quartas às 14:40!').
-
-
-bot_adauberto :- 
-    write('Olá, sou o Adaubertinho! Quando quiser parar de conversar, escreva stop.'), nl,
-    write('Quais suas dúvidas sobre as atividades de MPS?'), nl, 
-    talk.
-
