@@ -1,0 +1,90 @@
+:- initialization(bot_jedi).
+
+talk :-
+    nl,
+    read(topic),
+    interpret(topic).
+    
+% Main.
+bot_jedi :-
+    write("Started"),
+    talk.
+
+interpret(fim) :-
+    write("end").
+
+interpret(topicos) :-
+    write("Temos os seguintes topicos:"), nl,
+    write("- citacao --> poderá inserir o nome de um personagem e pegar uma citação aleatório do mesmo."), nl,
+    write("- filme --> poderá inserir o nome de um filme e pegar uma breve descrição do mesmo."), nl,
+    write("- naves --> poderá inserir o nome de uma nave e pegar uma breve descrição da mesma."), nl,
+    write("- personagem --> poderá inserir o nome de um personagem e pegar uma breve descrição do mesmo."), nl,
+    talk.
+    
+interpret(citacao) :-
+    % Pergunta de qual personagem o usuario quer uma citação
+    read(persona),
+    quote(persona, answer), !,
+    write(answer),
+    talk.
+    
+interpret(filme) :-
+    % Pergunta de qual filme o usuario quer uma breve descrição
+    read(film),
+    find_film(film, answer), !,
+    write(answer),
+    talk.
+
+interpret(naves) :- 
+    % Pergunta de qual nave o usuario quer uma breve descrição
+    read(spaceships),
+    spaceships(spaceships, answer), !,
+    write(answer),
+    talk.
+
+interpret(personagem) :-
+    % Pergunta de qual filme o usuario quer uma breve descrição
+    read(character),
+    character(character, answer), !,
+    write(answer),
+    talk.
+
+interpret(_) :-
+    % Mensagem de não saber o q o usuario inseriu na entrada
+    talk.
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%% Banco de dados %%%
+%%%%%%%%%%%%%%%%%%%%%%
+
+% Quotes
+
+% Films
+
+% Characters
+
+% Spaceships
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%%% Tratar erro %%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+
+% Tratativas de erro da citação
+quote(_) :- 
+    % Não conheço esse personagem
+    interpret(citacao).
+
+% Tratativas de erro de filmes
+find_film(_) :- 
+    % Não conheço esse filme
+    interpret(filme).
+
+% Tratativas de erro de personagens
+character(_) :- 
+    % Não conheço esse personagem
+    interpret(personagem).
+    
+spaceships(_) :-
+    % Não conheço essa nave
+    interpret(naves).
