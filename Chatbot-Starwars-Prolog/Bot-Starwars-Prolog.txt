@@ -98,11 +98,23 @@ mandalorian('Paz Vizsla').
 mandalorian('Tarre Vizsla').
 mandalorian('Sabine Wren').
 
+mandalorian('Boba Fett', 'He is a mandalorian').
+mandalorian('Jango Fett', 'He is a mandalorian').
+mandalorian('Din Djarin', 'He is a mandalorian').
+mandalorian('Grogu', 'He is a mandalorian').
+mandalorian('Armorer', 'He is a mandalorian').
+mandalorian('Axe Woves', 'She is a mandalorian').
+mandalorian('Kosha Reeves', 'She is a mandalorian').
+mandalorian('Bo-Katan', 'He is a mandalorian').
+mandalorian('Paz Vizsla', 'She is a mandalorian').
+mandalorian('Tarre Vizsla', 'She is a mandalorian').
+mandalorian('Sabine Wren', 'She is a mandalorian').
+
 mandalorian('registered', 'not registered').
 
 
 % Verify if ship is registered
-verify_mandalorian(X, Y) :- mandalorian(X), ! ; mandalorian('not registered', Y).
+verify_mandalorian(X, Y) :- mandalorian(X,Y), mandalorian(X), ! ; mandalorian('not a mandalorian', Y).
 
 
 % registered ships
