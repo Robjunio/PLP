@@ -374,7 +374,7 @@ verify_parent(X, Y) :- parent(X, Y), parent(X), ! ; parent('Not registered', Y).
 % Registered siblings
 siblin('Luke Skywalker').
 siblin('Leia Organa').
-siblin('Padmé Amidala').
+siblin('Padme Amidala').
 siblin('Sola Naberrie').
 
 
@@ -383,8 +383,8 @@ siblin('Not registered', 'Character not sregistered').
 
 siblin('Luke Skywalker', 'Leio Organa').
 siblin('Leia Organa', 'Luke Skywalker').
-siblin('Padmé Amidala', 'Sola Naberrie').
-siblin('Sola Naberrie', 'Padmé Amidala').
+siblin('Padme Amidala', 'Sola Naberrie').
+siblin('Sola Naberrie', 'Padme Amidala').
 
 
 % Verify if sibling is registered
