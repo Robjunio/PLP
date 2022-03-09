@@ -1,7 +1,7 @@
 :- initialization(bot_jedi).
 
 talk :-
-    write('O que deseja saber? '), nl,
+    write('What do you wish to know? '), nl,
     read(Topic),
     interpret(Topic).
     
@@ -13,79 +13,79 @@ bot_jedi :-
 interpret(fim) :-
     write('end').
     
-interpret(planeta) :-
-    write('Qual planeta deseja conhecer? '),
+interpret(planet) :-
+    write('Which planet do you want to know more about?'),
     read(Planet),
     planet(Planet, Answer), !,
     write(Answer),
     talk.
 
-interpret(nave) :-
-    write('Qual nave deseja conhecer? '),
+interpret(ship) :-
+    write('Which ship do you want to know more about?'),
     read(Ship),
     ship(Ship, Answer), !,
     write(Answer), nl,
     talk.
 
-interpret(mandaloriano) :-
-    write('insira o nome de um personagem: '),
+interpret(mandalorian) :-
+    write('Insert character name: '),
     read(Mandalorian),
     mandalorian(Mandalorian, Answer), !,
     write(Answer), nl,
     talk.
 
-interpret(forca) :-
-    write('insira o nome de um personagem: '),
+interpret(force) :-
+    write('Insert character name: '),
     read(Force),
     force(Force, Answer), !,
     write(Answer), nl,
     talk.
 
-interpret(citacao) :-
-    write('De qual personagem deseja conhecer uma citacao? '),
+interpret(quote) :-
+    write('Which character do you want to hear a quote from? '),
     read(Quote),
     quote(Quote, Answer), !,
     write(Answer), nl,
     talk.
 
-interpret(pais) :-
-    write('insira o nome do pai/mae para descobrir o filho: '),
+interpret(parents) :-
+    write('Insert parent name do find their offspring: '),
     read(Parent),
     parent(Parent, Answer), !,
     write(Answer), nl,
     talk.
 
-interpret(irmao) :-
-    write('insira o nome do personagem para descobrir o seu irmao: '),
-    read(Siblin),
+interpret(sibling) :-
+    write('Insert a character name do find their offspring: '),
+    read(Sibling),
     siblin(Siblin, Answer), !,
     write(Answer), nl,
     talk.
 
-interpret(mestre) :-
-    write('insira o nome do personagem para descobrir o seu aluno: '),
+interpret(master) :-
+    write('Insert a character name do find their apprentice: '),
     read(Master),
     master(Master, Answer), !,
     write(Answer), nl,
     talk.
 
 interpret(droid) :-
-    write('Qual droid deseja conhecer? '),
+    write('which droid do you want to know more about? '),
     read(Droid),
     droid(Droid, Answer), !,
     write(Answer), nl,
     talk.
 
 interpret(_) :-
-    write('Não conheco esse topico, mas posso te ajudar com alguma outra coisa?'), nl,
+    write('I don't have any records for this topic, is there anything else i can help you out with?'), nl,
     talk.
 
 %%%%%%%%%%%%%%%%%%%%%%
-%%% Banco de dados %%%
+%%%%% Data Bank %%%%%%
 %%%%%%%%%%%%%%%%%%%%%%
 
 
-% Mandalorianos cadastrados
+% registered mandalorians
 mandalorian('Boba Fett').
 mandalorian('Jango Fett').
 mandalorian('Din Djarin').
@@ -98,14 +98,14 @@ mandalorian('Paz Vizsla').
 mandalorian('Tarre Vizsla').
 mandalorian('Sabine Wren').
 
-mandalorian('Não cadastrado', 'mandaloriano não cadastrado').
+mandalorian('registered', 'not registered').
 
 
-% Verificar se a nave está cadastrado
-verify_mandalorian(X, Y) :- mandalorian(X), ! ; mandalorian('Não cadastrado', Y).
+% Verify if ship is registered
+verify_mandalorian(X, Y) :- mandalorian(X), ! ; mandalorian('not registered', Y).
 
 
-% naves cadastradas
+% registered ships
 ship('Millennium Falcon').
 ship('Star Destroyer').
 ship('TIE Interceptor').
@@ -126,7 +126,7 @@ ship('X-wing').
 ship('Corvette').
 ship('Imperial Shuttle').
 
-ship('Não cadastrado', 'nave não cadastrado').
+ship('not registered', 'ship not registered').
 
 ship('Millennium Falcon', 'Its the ship that made the Kessel Run in less than twelve parsecs. The Kessel Run is a 20-parsec route used by smugglers to move spice from Kessel without getting caught by the Imperial ships').
 ship('Millennium Falcon','Owned by Han Solo.').
@@ -166,76 +166,79 @@ ship('Corvette','The Tantive IV was a CR90 Corvette in the service of the House 
 ship('Imperial Shuttle','The Lambda-class T-4a shuttle was a multi-purpose transport with a trihedral foil design used by the Galactic Empire during the Galactic Civil War').
 
 
-% Verificar se a nave está cadastrado
-verify_ship(X, Y) :- ship(X, Y), ship(X), ! ; ship('Não cadastrado', Y).
+% Verify if ship is registered
+verify_ship(X, Y) :- ship(X, Y), ship(X), ! ; ship('not registered', Y).
 
 
 % Personagens com frases cadastradas
-quote('Leia').
-quote('Ackbar').
-quote('Vader').
-quote('Solo').
+quote('Leia Organa').
+quote('Luke Skywalker').
+quote('Han Solo').
+quote('Obi-Wan Kenobi').
+quote('Darth Vader').
 quote('Yoda').
-quote('Djarin').
-quote('Luke').
-quote('Padme').
+quote('Din Djarin').
+quote('Padme Amidala').
+quote('Ackbar').
 quote('Chewbacca').
-quote('Solo').
-quote('Kylo').
-quote('Obiwan').
-quote('Jin').
-quote('k2-sO').
+quote('Kylo Ren').
+quote('Jyn Erso').
+quote('K-2SO').
 quote('R2-D2').
-quote('Saw').
+quote('Saw Gerrera').
 quote('Chirrut').
+quote('Armorer').
+quote('Kuiil').
 
-quote('Não cadastrado', 'Personagem não cadastrado').
+quote('not registered', 'character registered').
 
-quote('Leia', 'Aren’t you a little short for a stormtrooper?').
-quote('Leia', 'Help me, Obi-Wan Kenobi. You are my only hope.').
-quote('Ackbar', 'Its a Trap!').
-quote('Vader', 'No, i am your father').
-quote('Vader', 'I find your lack of faith disturbing').
-quote('Solo', 'Youve never heard of the Millennium Falcon?… Its the ship that made the Kessel Run in less than twelve parsecs').
-quote('Luke', 'Amazing. Every word of what you just said was wrong').
+quote('Luke Skywalker', 'May the force be with you').
+quote('Luke Skywalker', 'I am a Jedi, like my father before me.').
+quote('Luke Skywalker', 'Strike me down in anger and i will always be with you.').
+quote('Luke Skywalker', 'I am a Jedi, like my father before me.').
+quote('Luke Skywalker', 'Amazing. Every word of what you just said was wrong').
+quote('Luke Skywalker', 'I have a bad feeling about this.').
+quote('Leia Organa', 'Arent you a little short for a stormtrooper?').
+quote('Leia Organa', 'Help me, Obi-Wan Kenobi. You are my only hope.').
+quote('Han Solo', 'Youve never heard of the Millennium Falcon?… Its the ship that made the Kessel Run in less than twelve parsecs').
+quote('Han Solo', 'Never tell me the odds').
+quote('Han Solo', 'I know.').
+quote('Han Solo', 'I takes orders from just one person: me.').
+quote('Leia Organa', 'I love you.').
+quote('Obi-Wan Kenobi', 'These arent the droids you are looking for.').
+quote('Obi-Wan Kenobi', 'Only Imperial Stormtroopers are so precise.').
+quote('Obi-Wan Kenobi', 'If you strike me down i shall become more powerful than you can possibly imagine').
+quote('Obi-Wan Kenobi', 'This is the weapon of a Jedi knight. Not as clumsy or random as a blaster, an elegant weapon for a more civilized age').
+quote('Obi-Wan Kenobi', 'Hello there.').
+quote('Obi-Wan Kenobi', 'Thats no moon. Its a space station.').
 quote('Yoda', 'Do or do not, there is no try').
 quote('Yoda', 'Size matters not').
-quote('Djarin', 'This is the way').
-quote('Luke', 'May the force be with you').
-quote('Padme', 'So this is how liberty dies. With thunderous applause').
-quote('Chewbacca', 'WWWWRRRRUUAAAAAAAANNNNNNNN').
-quote('Solo', 'Never tell me the odds').
-quote('Solo', 'I takes orders from just one person: me.').
-quote('Kylo', 'I will finish what you started').
-quote('Vader', 'The ability to destroy a planet is insignificant next to the power of the force').
-quote('Vader', 'I find your lack of faith disturbing').
 quote('Yoda', 'The fear of loss is a path to the dark side').
-quote('Obiwan', 'If you strike me down i shall become more powerful than you can possibly imagine').
-quote('Obiwan', 'This is the weapon of a Jedi knight. Not as clumsy or random as a blaster, an elegant weapon for a more civilized age').
-quote('Luke', 'Strike me down in anger and i will always be with you.').
-quote('Luke', 'I am a Jedi, like my father before me.').
 quote('Yoda', 'Fear leads to anger. Anger leads to hate. Hate leads to suffering.').
-quote('Vader', 'When I left you, I was but the learner. Now I am the master.').
-quote('Jin', 'This is a rebellion isnt it? I rebel.').
-quote('k2-sO', 'Congratulations. You Are Being Rescued.').
+quote('Darth Vader', 'No, i am your father').
+quote('Darth Vader', 'When I left you, I was but the learner. Now I am the master.').
+quote('Darth Vader', 'I find your lack of faith disturbing').
+quote('Darth Vader', 'The ability to destroy a planet is insignificant next to the power of the force').
+quote('Din Djarin', 'This is the way').
+quote('Armorer', 'This is the way').
+quote('Kuiil', 'I have spoken').
+quote('Padme Amidala', 'So this is how liberty dies. With thunderous applause').
+quote('Ackbar', 'Its a Trap!').
+quote('Chewbacca', 'WWWWRRRRUUAAAAAAAANNNNNNNN').
+quote('Kylo Ren', 'I will finish what you started').
+quote('Jyn Erso', 'This is a rebellion isnt it? I rebel (from trailer).').
+quote('Jyn Erso', 'Rebellions Are Built On Hope.').
+quote('K-2SO', 'Congratulations. You Are Being Rescued.').
 quote('R2-D2', 'BIP BOP BIP BIP').
-quote('Saw', 'Save The Rebellion! Save The Dream!').
-quote('Jin', 'Rebellions Are Built On Hope.').
+quote('Saw Gerrera', 'Save The Rebellion! Save The Dream!').
 quote('Chirrut', 'I Am One With The Force, And The Force Is With Me.').
-quote('Luke', 'I have a bad feeling about this.').
-quote('Obiwan', 'These arent the droids you are looking for.').
-quote('Obiwan', 'Only Imperial Stormtroopers are so precise.').
-quote('Leia', 'I love you.').
-quote('Solo', 'I know.').
-quote('Obiwan', 'Hello there.').
-quote('Obiwan', 'Thats no moon. Its a space station.').
 
 
-% Verificar se a nave está cadastrado
-verify_quote(X, Y) :- quote(X, Y), quote(X), ! ; quote('Não cadastrado', Y).
+% Verify if ship is registered
+verify_quote(X, Y) :- quote(X, Y), quote(X), ! ; quote('Not registered', Y).
 
 
-% Usuarios da força cadastrados
+% Registered force users
 force('Luke Skywalker').
 force('Obi-Wan Kenobi').
 force('Yoda').
@@ -259,7 +262,7 @@ force('Ahsoka Tano').
 force('Grogu').
 force('Leia Organa').
 
-force('Não cadastrado', 'Personagem não cadastrado').
+force('Not registered', 'Character not registered').
 
 force('Luke Skywalker', 'Jedi.').
 force('Obi-Wan Kenobi', 'Jedi.').
@@ -285,11 +288,11 @@ force('Grogu', 'Force-sensitive.').
 force('Leia Organa', 'Force-sensitive.').
 
 
-% Verificar se a nave está cadastrado
-verify_force(X, Y) :- force(X, Y), force(X), ! ; force('Não cadastrado', Y).
+% Verify ship is registered
+verify_force(X, Y) :- force(X, Y), force(X), ! ; force('Not registered', Y).
 
 
-% Planetas cadastrados
+% registered planets
 planet('Abafar').
 planet('Alderaan').
 planet('Bardotta').
@@ -297,47 +300,52 @@ planet('Bespin').
 planet('Carlac').
 planet('Christophsis').
 planet('Coruscant').
-planet('Dagobah').
 planet('Dathomir').
 planet('Felucia').
 planet('Florrun').
-planet('Planeta da Força').
+planet('Dagobah').
 planet('Geonosis').
 planet('Hoth').
+planet('Force planet').
 planet('Kamino').
 planet('Mandalore').
 planet('Mustafar').
 planet('Naboo').
 planet('Tatooine').
+planet('Jedha').
+planet('Yavin 4').
 
-planet('Não cadastrado', 'Planeta não cadastrado').
+planet('Not registered', 'Planet not registered').
 
-planet('Abafar', 'Um mundo remoto nos Territórios da Orla Exterior, Abafar é pouco povoado. É dominado por vastas extensões de deserto inexpressivo sob céus alaranjados opressivos. O estranho regolito que cobre a superfície distorce a luz de forma a obscurecer as sombras e não deixar rastros. Partículas na atmosfera fazem com que a luz do sol se difunda em um brilho laranja uniforme, por isso é quase impossível dizer a direção ou a hora do dia. Os enormes trechos de extensão inexpressiva são conhecidos como The Void. Pons Ora é um dos poucos assentamentos em Abafar, e é o local de uma instalação de mineração de Rhydonium operada pelos Separatistas durante as Guerras Clônicas.').
-planet('Alderaan', 'Se alguma vez alguém precisou de um exemplo do mal irredimível que era o Império, volte-se para os restos destroçados de Alderaan. Um mundo influente, Alderaan foi representado nos últimos dias da República por políticos venerados como Bail Antilles e Bail Organa. Um mundo pacífico, Alderaan estava desprovido de armamento em uma era de conflitos galácticos. Não foi sem espírito, no entanto. Alderaan foi um dos primeiros apoiadores da Aliança para Restaurar a República, embora seus funcionários prudentemente mantivessem todos os laços com a Rebelião em segredo. Apesar de tal discrição, o Império sabia que era um refúgio de atividade Rebelde, e Grand Moff Tarkin mirou o belo mundo para represália assim que a Estrela da Morte estivesse operacional. A enorme arma primária da estação de batalha destruiu Alderaan, deixando apenas um campo de asteróides sem vida para trás.').
-planet('Bardotta', 'Durante as Guerras Clônicas, Bardotta foi o cenário de um mistério sombrio. Anteriormente um mundo pacífico, os líderes espirituais do planeta começaram a desaparecer sem aviso prévio. A Rainha Julia da Bardotta solicitou que o Senado enviasse Jar Jar Binks para investigar – mas nenhum Jedi devido a uma desconfiança de longa data da Ordem. Quando os Jedi começaram a introduzir as crianças Bardottan na Ordem, eles foram rotulados como ladrões. Em última análise, Mace Windu acompanhou Binks, e juntos eles descobriram as partes do mal por trás dos desaparecimentos.').
-planet('Bespin', 'Isolada da turbulência galáctica por sua localização em um setor pouco visitado do espaço, Bespin é uma raridade astrofísica. Um imenso gigante gasoso cercado por várias luas, o planeta contém uma faixa de atmosfera habitável entre suas infinitas nuvens. Nesse estrato da vida, garimpeiros empreendedores estabeleceram complexos de mineração flutuantes dedicados à extração de gases valiosos das profundezas do planeta. O mais conhecido desses empreendimentos é a opulenta Cloud City, anteriormente sob a administração de Lando Calrissian. Durante o final da Guerra Civil Galáctica, o Império guarneceu Bespin e assumiu Cloud City, embora o posto avançado e o planeta gozassem de liberdade após a derrota do Imperador na Batalha de Endor.').
-planet('Carlac', 'Um mundo lindo e coberto de neve nos Territórios da Orla Exterior, Carlac evitou grande parte da violência das Guerras Clônicas. Mas quando os guerreiros nômades do Olho da Morte o transformaram em um acampamento, o planeta e seu pacífico povo Ming Po enfrentaram a morte e a destruição. Os cruéis guerreiros do Olho da Morte ergueram tendas temporárias ao lado de uma cidade Ming Po e invadiram a vila indefesa em busca de servos. O chefe Pieter, líder dos Ming Po, exigiu que o Olho da Morte deixasse Carlac imediatamente, desencadeando o temperamento cruel de Pre Vizsla.').
-planet('Christophsis', 'Uma bela joia de um mundo com imensas formações cristalinas, Christophsis foi palco de repetidas e acaloradas batalhas nas Guerras Clônicas. Um bloqueio de naves separatistas prendeu uma missão de socorro do Senado atrás das linhas inimigas, necessitando de uma força-tarefa especial da República com tecnologia experimental de nave estelar para dispersar o bloqueio. Isso precipitou uma invasão separatista em grande escala do planeta, possibilitada por um traidor dentro das fileiras de soldados clones. No final, a República conseguiu reverter a invasão separatista e proteger o planeta de futuras incursões.').
-planet('Coruscant', 'Um planeta coberto de cidades, Coruscant é o coração vibrante e a capital da galáxia, apresentando uma mistura diversificada de cidadãos e cultura. Possui arranha-céus imponentes, fluxos de tráfego aéreo cheios de velocidade e níveis internos que se estendem muito abaixo da superfície do mundo. Coruscant foi a sede do governo da República Galáctica e do Império que se seguiu, e foi o local de vários eventos históricos durante as Guerras Clônicas. Ele também abrigou o Templo Jedi e Arquivos, que abrigaram treinamento e aprendizado Jedi por mais de mil gerações – tradições que terminaram quando o planeta testemunhou a Ordem 66.').
-planet('Dagobah', 'Lar de Yoda durante seus últimos anos, Dagobah era um planeta coberto de pântanos forte com a Força - um mundo esquecido onde o Mestre Jedi enrugado poderia escapar da atenção das forças imperiais. Caracterizado por suas condições de pântano e pântanos fétidos, o pântano escuro e úmido era pouco desenvolvido, sem sinais de tecnologia. Embora carecesse de civilização, o planeta estava repleto de vida – desde sua densa vegetação rasteira até sua diversificada população animal. Lar de várias criaturas reptilianas e anfíbias bastante comuns, Dagobah também ostentava uma população indígena de formas de vida muito mais massivas - e misteriosas. Cercado por criaturas que geram a Força viva, Yoda aprendeu a se conectar com a Força cósmica mais profunda e esperou por alguém que pudesse trazer o retorno da Ordem Jedi.').
-planet('Dathomir', 'Um planeta remoto, Dathomir está encharcado de luz vermelho-sangue de sua estrela central. O planeta tem continentes invadidos por vegetação retorcida, com florestas de árvores curvadas carregadas de grandes frutos semelhantes a casulos. Contornando densos pântanos estão as enormes fortalezas de pedra das Irmãs da Noite, um clã de bruxas. As Irmãs da Noite eram reservadas, mas de vez em quando eram conhecidas por oferecer seus serviços àqueles que despertavam seus interesses. Longe das Irmãs da Noite viviam os Irmãos da Noite - um clã tatuado de guerreiros Zabrak eram subservientes às suas contrapartes femininas.').
-planet('Felucia', 'Felucia é um mundo repleto de formas de vida fúngicas e imensas plantas primitivas. Grande parte do planeta tem uma paisagem fétida e úmida coberta por florestas de natureza selvagem bizarra. Muitas das formas de vida em Felucia são parcial ou completamente translúcidas; eles colorem a luz do sol à medida que os raios penetram em sua pele. Outros são opacos e imponentes, como os enormes rancores da selva que rondam a paisagem. Sob as copas nebulosas das enormes plantas de jarro e crescimentos frondosos, há uma extensão surreal encharcada de cores. Durante as Guerras Clônicas, os Jedi tentaram defender Felucia daqueles que explorariam o planeta.').
-planet('Florrun', 'Um mundo desértico e árido nos Territórios da Orla Exterior, Florrum está fora do caminho comum das principais rotas do hiperespaço galáctico, tornando-se o refúgio perfeito para criminosos caçados ou bandidos sem lei. Durante as Guerras Clônicas, Hondo Ohnaka administrou uma lucrativa operação de salvamento e pirataria em Florrum. Seus assuntos se cruzaram com os Jedi em mais de uma ocasião.').
-planet('Planeta da Força', 'Não marcado em nenhum mapa estelar e não reconhecido com nenhum nome específico, o planeta da Força é um mundo místico e a base da própria vida. É o berço dos midi-chlorians, organismos microscópicos que conectam a Força viva à Força cósmica. Cercado por uma nebulosa brilhante, o planeta da Força é um lugar estéril, apresentando apenas gêiseres luminescentes que disparam energia das profundezas do mundo. Várias ilhas pairam acima da superfície, cada uma repleta de vida vegetal e forte com a Força.').
-planet('Geonosis', 'Um mundo rochoso áspero a menos de um parsec de Tatooine, Geonosis é um planeta com anéis além das fronteiras da República Galáctica. Sua superfície pouco convidativa é composta de deserto áspero e rochoso, e as criaturas que evoluíram em Geonosis estão bem equipadas para sobreviver no ambiente brutal. A forma de vida mais avançada são os Geonosians, insectoides sencientes que habitam colmeias em espiral. Os Geonosians mantêm grandes fábricas para a produção de droides e armas para a causa Separatista nas Guerras Clônicas. Após as Guerras Clônicas, o Império escolheu Geonosis como local de construção da primeira Estrela da Morte, restringindo as viagens ao sistema e esterilizando a superfície do planeta.').
-planet('Hoth', 'Hoth é o sexto planeta no sistema remoto de mesmo nome, e foi o local da Echo Base da Aliança Rebelde. É um mundo de neve e gelo, cercado por inúmeras luas e lar de criaturas mortais como o wampa.').
-planet('Kamino', 'Uma vez expurgado dos Arquivos Jedi, de outra forma completos, todas as evidências do misterioso mundo de Kamino. Um mundo solitário além da Orla Exterior e ao sul do Rishi Maze, poucos poderiam ter previsto que Kamino se tornaria um dos principais contribuintes para uma grande mudança no poder político nos últimos dias da República. Kamino é um planeta de oceanos e tempestades sem fim. Poucas características marcam sua superfície, exceto por enormes cidades sobre palafitas onde residem os habitantes naturais do planeta, os Kaminoanos. Da Cidade Tipoca, o primeiro-ministro do planeta governa. Lama Su e a cientista médica chefe de Kamino, Nala Se, monitoram de perto as operações da exportação mais valiosa de Kamino - clones - mesmo depois que as Guerras Clônicas chegam ao fim.').
-planet('Mandalore', 'Um mundo orgulhoso com uma rica cultura guerreira, Mandalore é o lar de vários clãs unidos sob Bo-Katan Kryze, portador do Darksaber.').
-planet('Mustafar', 'Um planeta minúsculo e ardente na Orla Exterior, Mustafar mantém uma órbita errática entre dois gigantes gasosos. Mustafar é rico em minerais únicos e valiosos que há muito são extraídos pela Tech Union. Seus poços de lava e rios fazem deste planeta um habitat perigoso; seus nativos têm corpos fortes e robustos que podem suportar calor extremo. O planeta tornou-se o pano de fundo para o duelo fatídico entre Obi-Wan Kenobi e Anakin Skywalker. Após a ascensão do Império, os Jedi capturados foram levados ao mundo vulcânico para interrogatório e execução.').
-planet('Naboo', 'Um mundo idílico perto da fronteira dos Territórios da Orla Exterior, Naboo é habitado por humanos pacíficos conhecidos como Naboo, e uma espécie nativa de anfíbios inteligentes chamados Gungans. A superfície de Naboo consiste em lagos pantanosos, planícies onduladas e colinas verdes. Seus centros populacionais são lindos - as cidades fluviais de Naboo estão repletas de arquitetura clássica e vegetação, enquanto os assentamentos subaquáticos de Gungan são uma bela exibição da exótica tecnologia de bolhas hidrostáticas.').
-planet('Tatooine', 'Tatooine é um mundo desértico que orbita sóis gêmeos na Orla Exterior da galáxia. Nos dias do Império e da República, muitos colonos ganhavam a vida em fazendas úmidas, enquanto cidades portuárias como Mos Eisley e Mos Espa serviam de base para contrabandistas, criminosos e outros bandidos. Anakin Skywalker e Luke Skywalker já chamaram Tatooine de casa, e Obi-Wan Kenobi passou anos escondido lá. Uma vez conhecida como uma colmeia de escória e vilania, Tatooine ficou mais quieta desde o fim da Guerra Civil Galáctica.').
-
-
-% Verificar se planeta está cadastrado
-verify_planet(X, Y) :- planet(X, Y), planet(X), ! ; planet('Não cadastrado', Y).
+planet('Abafar', 'Abafar was a remote desert planet located within the Outer Rim Territories, and was host to massive amounts of rhydonium, a scarce and volatile fuel source. The large desert was known as the Void, and light was twisted in a way by the strange regolith that made it impossible to see tracks because there were no shadows. During the Clone Wars, the Confederacy of Independent Systems set up a mining installation in the settlement of Pons Ora. The planet wasnt very populated.').
+planet('Alderaan', 'Alderaan, located in the Core Worlds, was a terrestrial planet covered with mountains. During the waning decades of the Galactic Republic, it was ruled by Queen Breha Organa and represented in the Galactic Senate by her husband, Senator Bail Prestor Organa.').
+planet('Bardotta', 'Bardotta was a remote planet located in the Bardotta system of the Shasos sector of the the galaxys Colonies region. Renowned for the art and music produced by the simple locals, the planet was ruled by a monarch who was guided in their decisions by the Dagoyan Order, a group reputed for their mysticism and attention to spiritual matters.').
+planet('Bespin', 'Bespin was a gas giant in the star system of the same name. Forming a part of the Anoat sector, its riches manifested in the form of rare tibanna gas. Attracting mining interests and remaining unaffiliated in galactic affairs, Ugnaughts were employed to extract tibanna from repulsorlifted facilities whilst Bespin's mostly human population resided in the open upper levels, exposed to a thin layer of breathable atmosphere in an area known as a Life Zone.').
+planet('Carlac', 'Carlac was a peaceful, snow-covered planet in the Outer Rim Territories. A town inhabited by members of the Ming Po culture existed on the planet during the Clone Wars. However, that village was burned to the ground by the Death Watch, a radical Mandalorian terrorist group.').
+planet('Christophsis', 'Christophsis was a planet located in the Christoph system of the galaxy's Outer Rim Territories where the Battle of Christophsis was fought during the Clone Wars. The crystalline planet was invaded by the battle droid armies of the Confederacy of Independent Systems but were repelled by the Jedi and Clone troopers dispatched by the Galactic Republic. Later, the planet was the site of a second battle between the Republic and the Separatists. After the transformation of the Galactic Republic into the Galactic Empire, the planet was placed under Imperial control, but nevertheless hosted rebellious elements.').
+planet('Coruscant', 'Coruscant, also known as Imperial Center during the rule of the Galactic Empire, was an ecumenopolis—a city-covered planet, collectively known as Imperial City— in the Coruscant system of the Core Worlds. Though debated by historians, it was generally believed that Coruscant was the original homeworld of humanity. Coruscant was at one point also historically the home of the ancient Taung and Zhell. Noted for its cosmopolitan culture and towering skyscrapers, Coruscant's population consisted of trillions of citizens hailing from a vast array of both humanoid and alien species.').
+planet('Dathomir', 'Dathomir, nicknamed the rancor planet, was a remote, neutral and obscure planet in the Dathomir system of the Quelli sector in the Outer Rim Territories and New Territories of the galaxy. and the home of the Nightsisters, Nightbrothers, Blue Coral Divers Clan, Singing Mountain, and the Howling Crag. The planet, bathed in blood-red light by its central star, had numerous continents that were overrun with vegetation, forests, and swamplands. The dark side of the Force had an immensely strong presence on Dathomir, which allowed for the nurturing of many malevolent Force wielders native to the planet.').
+planet('Felucia', 'Felucia, known as Galush prior to the formation of the Galactic Republic, was a colorful, humid jungle planet located in the Felucia system of the galaxy's Outer Rim Territories. The headquarters of the Commerce Guild, its primary agricultural export was the valuable crop nysillin, which was largely farmed by the native Felucian tribes. Its important strategic location along the Perlemian Trade Route made it a major battleground throughout the Clone Wars.').
+planet('Florrun', 'Florrum was a sulfurous desert planet located in the Florrum system, within the Sertar sector of the galaxy's Outer Rim Territories. During the Clone Wars, it was the location of a pirate gang led by Hondo Ohnaka. Florrum was briefly held by the Confederacy of Independent Systems before the forces of General Grievous were repelled by Ohnaka's forces and the Jedi.').
+planet('Dagobah', 'Dagobah was a remote, unexplored planet in the Dagobah system, and one of the purest places in the galaxy within the Force. A remote world of swamps and forests, it served as a refuge for Jedi Grand Master Yoda during his exile after the destruction of the Jedi Order. Luke Skywalker received advanced training in the ways of the Force under Jedi Master Yoda on Dagobah, and it was later the place of Yoda's death and transformation into the Force.').
+planet('Geonosis', 'Geonosis, referred to as Geonosia by some natives, and known as Genosha, was the desert home planet of the Geonosians. It was the Confederacy of Independent Systems' first capital and hosted its major battle droid foundries. It was the site of the First Battle of Geonosis, the opening conflict of the Clone Wars, as well as the subsequent invasion by the Galactic Republic. During and after the war, the Death Star was constructed above the planet. Five years after the conflict's conclusion and transformation of the Galactic Republic, the Galactic Empire would garrison the planet heavily and attempt to mine the planet's asteroids for minerals.').
+planet('Hoth', 'Hoth was a remote, icy planet that was the sixth planet in the star system of the same name, located in the Anoat sector of the galaxy's Outer Rim Territories. It was the homeworld to the primitive Wampa species.').
+planet('Kamino', 'Kamino was an aquatic extragalactic planet located in a remote star system beyond the Outer Rim just outside the boundaries of the galaxy and straggled south of the Rishi Maze irregular dwarf satellite galaxy. It was inhabited by the Kaminoans — a race of tall, elegant beings with long necks who were regarded as a mysterious species that tended to keep to themselves. They were also known for their cloning technology, which was used to create a clone army for the Galactic Republic').
+planet('Force planet', 'A planet located somewhere "in the heart of the galaxy," was the homeworld to the midi-chlorians. Its surface appeared barren and heavily damaged, but life was plentiful in large open spaces deep beneath the ground. Large amounts of light were released from within the planet, which was hidden in the Force, and also appeared to negatively affect mechanical and electronic devices').
+planet('Mandalore', 'Mandalore was a planet located in the Outer Rim Territories. It was the homeworld of the Mandalorians, a fearsome warrior people who fought the Jedi and raided their temple during the fall of the Old Republic. Wearing distinctive armor that was often made from Beskar, they were feared throughout the galaxy, and had political influence over two thousand other star systems.').
+planet('Mustafar', 'Mustafar was a small planet located in the Mustafar system, within the Atravis sector of the galaxy's Outer Rim Territories. Once a garden world nourished by the Bright Star artifact, its orbit was shifted when Lady Corvax unleashed the energies of the Bright Star in an attempt to return her husband to life. The resulting gravimetric duel between the gas giants Jestefad and Lefrani over Mustafar heated the planet's core, transforming the lush world into an imbalanced volcanic hellscape.').
+planet('Naboo', 'Naboo was a bountiful planet in the Chommell sector of the Mid Rim, in the Trailing Sectors and close to the border of the Outer Rim Territories. It was home to the indigenous Gungan species and to a population of humans known as the Naboo. Naboo was pushed to the forefront of galactic politics as the birthplace of the Dark Lord of the Sith Sheev Palpatine, who served as its representative in the Senate of the Galactic Republic.').
+planet('Tatooine', 'Tatooine was a sparsely inhabited circumbinary desert planet located in the galaxy's Outer Rim Territories. Part of a binary star system, the planet was oppressed by scorching suns, resulting in the world lacking the necessary surface water to sustain large populations. As a result, many residents of the planet instead drew water from the atmosphere via moisture farms. The planet also had little surface vegetation. It was the homeworld to the native Jawa and Tusken Raider species and of Anakin and Luke Skywalker, who would go on to shape galactic history.').
+planet('Jedha', 'Jedha, also known as the Pilgrim Moon, or as the Cold Moon, was a small desert moon which orbited the planet NaJedha. Located in the Jedha system of the galaxy's Mid Rim, the moon had a cold climate due to its lasting winter. The historical and spiritual significance of Jedha led the moon to become a world of worship for those who believed in the Force, and a holy site for pilgrims who sought spiritual guidance.').
+planet('Yavin 4', 'Yavin 4, also known as Yavin, was the jungle-covered fourth moon in orbit around the red gas giant Yavin Prime. Prior to and during the Galactic Civil War, it hosted the headquarters of the Alliance to Restore the Republic, a group of resistance fighters that opposed the dominant Galactic Empire. Following a major battle that took place around Yavin, the Alliance went on the run, and eventually relocated its headquarters to Hoth.').
 
 
-% Pais cadastrados
+
+% Verify if planet is registered
+verify_planet(X, Y) :- planet(X, Y), planet(X), ! ; planet('Not registered', Y).
+
+
+% Registered parents
 parent('Shmi Skywarlker').
 parent('Jobal Naberrie').
 parent('Ruweee Naberrie').
@@ -347,7 +355,7 @@ parent('Leia Organa').
 parent('Han Solo').
 
 
-parent('Não cadastrado', 'Personagem não cadastrado').
+parent('Not registered', 'Character not registered').
 
 
 parent('Shmi Skywalker', 'Anakin Skywalker').
@@ -359,18 +367,18 @@ parent('Leia Organa', 'Kylo Ren').
 parent('Han Solo', 'Kylo Ren').
 
 
-% Verificar se planeta está cadastrado
-verify_parent(X, Y) :- parent(X, Y), parent(X), ! ; parent('Não cadastrado', Y).
+% Verify if planet is registered
+verify_parent(X, Y) :- parent(X, Y), parent(X), ! ; parent('Not registered', Y).
 
 
-% Irmãos cadastrados
+% Registered siblings
 siblin('Luke Skywalker').
 siblin('Leia Organa').
 siblin('Padmé Amidala').
 siblin('Sola Naberrie').
 
 
-siblin('Não cadastrado', 'Personagem não cadastrado').
+siblin('Not registered', 'Character not sregistered').
 
 
 siblin('Luke Skywalker', 'Leio Organa').
@@ -379,11 +387,11 @@ siblin('Padmé Amidala', 'Sola Naberrie').
 siblin('Sola Naberrie', 'Padmé Amidala').
 
 
-% Verificar se irmão está cadastrado
-verify_siblin(X, Y) :- siblin(X, Y), siblin(X), ! ; siblin('Não cadastrado', Y).
+% Verify if sibling is registered
+verify_siblin(X, Y) :- siblin(X, Y), siblin(X), ! ; siblin('Not registered', Y).
 
 
-% Mestres cadastrados
+% Registered masters
 master('Yoda').
 master('Obi-Wan Kenobi').
 master('Anakin Skywalker').
@@ -391,7 +399,7 @@ master('Luke Skywalker').
 master('Darth Sidious').
 
 
-master('Não cadastrado', 'Personagem não cadastrado').
+master('Not registered', 'Character not registered').
 
 
 master('Yoda', 'Dookan').
@@ -403,8 +411,8 @@ master('Luke Skywalker', 'Kylo Ren').
 master('Darth Sidious', 'Darth Vader').
 
 
-% Verificar se irmão está cadastrado
-verify_master(X, Y) :- master(X, Y), master(X), ! ; master('Não cadastrado', Y).
+% Verify if sibling is registered
+verify_master(X, Y) :- master(X, Y), master(X), ! ; master('Not registered', Y).
 
 
 droid('R2-D2').
@@ -422,7 +430,7 @@ droid('Super droids').
 droid('2-1B').
 droid('Power droid').
 
-droid('Não cadastrado', 'droid não cadastrado').
+droid('Not registered', 'Droid not registered').
 
 droid('R2-D2', 'R2-D2 is an R2-series astromech droid with smart, spunky personality who would serve a multitude of masters over his lifetime.').
 droid('R2-D2', 'R2-D2 was never given a full memory wipe.').
@@ -450,5 +458,5 @@ droid('2-1B', '2-1B-series medical droids, also known as 2-1B surgical droids, w
 droid('Power droid', 'Power droids were unsophisticated droids that acted as ambulatory batteries, recharging vehicles and machinery.').
 
 
-% Verificar se irmão está cadastrado
-verify_droid(X, Y) :- droid(X, Y), droid(X), ! ; droid('Não cadastrado', Y).
+% Verificar is sibling is registered
+verify_droid(X, Y) :- droid(X, Y), droid(X), ! ; droid('Not registered', Y).
