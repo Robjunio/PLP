@@ -1,0 +1,61 @@
+(write-line "Q1 - Fatorial")
+(defun fatorial(n)
+    (if (zerop n)
+        1
+    (* n (fatorial(1- n)))))
+
+(time(print(fatorial 5)))
+(time(print(fatorial 10)))
+(time(print(fatorial 50)))
+
+
+(write-line "------------------------------")
+
+(write-line "Q2 - Fibonacci")
+(defun fibonacci (n)
+  (check-type n (integer 0 *))
+  (do ((i n (1- i))
+       (f1 0 f2)
+       (f2 1 (+ f1 f2)))
+      ((= i 0) f1)))
+
+(print(fibonacci 10))
+
+
+(write-line "------------------------------")
+
+
+(write-line "Q4 - União")
+(defun uniao (seq1 seq2)
+	(if (null seq1)
+		seq2
+		(cons (car seq1) (uniao (cdr seq1) seq2))))
+
+(print(uniao '(1 2 3 ) '(3 4 5 6 )))
+
+
+(write-line "------------------------------")
+
+(write-line "Q10 - Fatorial com a cauda")
+(defun tail_fatorial (number)
+  (labels ((sequencia-aux (x acumulador)
+             (if (zerop x)
+                 acumulador
+                 (sequencia-aux (- x 1) (* acumulador x)))))
+    (sequencia-aux number 1)))
+(time(print(tail_fatorial 5)))
+(time(print(tail_fatorial 10)))
+(time(print(tail_fatorial 50)))
+
+
+(write-line "------------------------------")
+
+(write-line "Q6 - Sequencia")
+(defun sequencia (a b)
+    (let ((x (+ a b)))
+    (let ((x (- x 1)))
+    (loop for b from b to x
+        do (format t "~d " b))))
+        (write-line  "  "))
+
+(sequencia 5 20)
