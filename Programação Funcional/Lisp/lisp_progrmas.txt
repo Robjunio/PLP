@@ -9,7 +9,8 @@
 (time(print(fatorial 50)))
 
 
-(write-line "------------------------------")
+(write-line 
+"------------------------------")
 
 (write-line "Q2 - Fibonacci")
 (defun fibonacci (n)
@@ -22,7 +23,8 @@
 (print(fibonacci 10))
 
 
-(write-line "------------------------------")
+(write-line 
+"------------------------------")
 
 
 (write-line "Q4 - União")
@@ -34,7 +36,8 @@
 (print(uniao '(1 2 3 ) '(3 4 5 6 )))
 
 
-(write-line "------------------------------")
+(write-line 
+"------------------------------")
 
 (write-line "Q10 - Fatorial com a cauda")
 (defun tail_fatorial (number)
@@ -48,7 +51,8 @@
 (time(print(tail_fatorial 50)))
 
 
-(write-line "------------------------------")
+(write-line 
+"------------------------------")
 
 (write-line "Q6 - Sequencia")
 (defun sequencia (a b)
@@ -59,3 +63,37 @@
         (write-line  "  "))
 
 (sequencia 5 20)
+
+
+(write-line 
+"------------------------------")
+
+(write-line "Q3 - Intercalacao")
+
+(defun intercalacao(a b)
+    (if(not a)
+        b
+        (if(not b)
+         a
+         (append(list (car a) (car b))(intercalacao (cdr a) (cdr b)))
+        )))
+(print(intercalacao '(1 2 2 3) '(3 5 5 6)))
+
+
+(write-line 
+"------------------------------")
+
+(write-line "Q7 - Pares e Impares")
+(defun paresImpares (a)
+    (if (not a)
+        (list nil nil)
+        (let ((r (paresImpares(cdr a))))
+            (if(oddp (car a))
+                
+                (list (cons(car a) (car r))(second r))
+                (list  (car r) (cons (car a) (second r)))
+            ))))
+
+(print(paresImpares '(1 2 3 4 5 6)))
+
+
