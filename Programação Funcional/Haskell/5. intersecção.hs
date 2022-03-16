@@ -13,7 +13,7 @@ interseccao as bs = [a | a <- as, (pertence a bs)]
 
 main :: IO()
 main = do
-         putStr "- intersecção de listas -\nInsira duas listas:\n"
+         putStr "- Intersecção de listas -\nInsira duas listas:\n"
          l1 <- getLine
          l2 <- getLine
          print(interseccao (l1)(l2))
