@@ -8,7 +8,8 @@
 % waiting for a message from the previous process in the ring.
 % 
 % 	N - the number of processes in the ring
-% 	
+% 
+
 create_ring(N) -> 
 	Pid = spawn(ring, ring_start, []),
 	create_ring(N, [Pid], Pid).
@@ -28,6 +29,7 @@ create_ring(N, [PPid|Acc], Start) ->
 % so that the messaging can be started. After that, this
 % function is then responsible for the counting of the
 % ring iterations as well as terminating the ring messages.
+
 ring_start() ->
 	receive
 		{NPid} ->
