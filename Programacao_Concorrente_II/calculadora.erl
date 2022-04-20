@@ -11,52 +11,44 @@
 % 5. Recursão.
 
 addition() ->
-	io:format("addition: (re)started~n"),
+	io:format("O processo de adição foi iniciado.~n"),
 	receive
 		{From, X, Y} ->
-			Result = X + Y,
-			io:format("addition: from ~p: ~p + ~p = ~p~n",
-				  [From, X, Y, Result]),
-			From ! {result, Result},
+			io:format("De ~p, ~p + ~p = ~p~n", [From, X, Y, X + Y]),
+			From ! {result, X + Y},
 			addition()
 	end.
 
 subtraction() ->
-	io:format("subtraction: (re)started~n"),
+	io:format("O processo de subtração foi iniciado.~n"),
 	receive
 		{From, X, Y} ->
-			Result = X - Y,
-			io:format("subtraction: from ~p: ~p - ~p = ~p~n",
-				  [From, X, Y, Result]),
-			From ! {result, Result},
+			io:format("De ~p: ~p - ~p = ~p~n", [From, X, Y, X - Y]),
+			From ! {result, X - Y},
 			subtraction()
 	end.
 
 multiplication() ->
-	io:format("multiplication: (re)started~n"),
+	io:format("O processo de multiplicação foi iniciado.~n"),
 	receive
 		{From, X, Y} ->
-			Result = X * Y,
-			io:format("multiplication: from ~p: ~p * ~p = ~p~n",
-				  [From, X, Y, Result]),
-			From ! {result, Result},
+			io:format("De ~p: ~p * ~p = ~p~n", [From, X, Y, X * Y]),
+			From ! {result, X * Y},
 			multiplication()
 	end.
 
 division() ->
-	io:format("division: (re)started~n"),
+	io:format("O processo de divisão foi iniciado.~n"),
 	receive
 		{From, X, Y} ->
-			Result = X / Y,
-			io:format("division: from ~p: ~p / ~p = ~p~n",
-				  [From, X, Y, Result]),
-			From ! {result, Result},
+			io:format("De ~p: ~p / ~p = ~p~n", [From, X, Y, X / Y]),
+			From ! {result, X / Y},
 			division()
 	end.
 
-interpret(Expression) -> interpret(Expression, 0).
+interpret(Expressao) -> interpret(Expressao, 0).
 
-interpret([], Buffer) -> Buffer;
+interpret([], Cache) -> Cache;
 
 interpret([Current | Rest], Buffer) ->
 	if
@@ -82,11 +74,13 @@ interpret([Current | Rest], Buffer) ->
 			{Operator, Buffer, SubExpression}
 	end.
 
-compute(Expression) when is_integer(Expression) ; is_float(Expression) ->
-	Expression;
+compute(Expressao) when 
+	is_integer(Expressao) ; 
+	is_float(Expressao) ->
+		Expressao;
 
-compute(Expression) when is_tuple(Expression) ->
-	case Expression of
+compute(Expressao) when is_tuple(Expressao) ->
+	case Expressao of
 		{'+', X, Y} ->
 			addition ! {self(), compute(X), compute(Y)};
 		{'-', X, Y} ->
