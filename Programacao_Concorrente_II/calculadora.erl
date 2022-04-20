@@ -23,7 +23,7 @@ subtracao() ->
 	io:format("O processo de subtracao foi (Re)iniciado.~n"),
 	receive
 		{From, X, Y} ->
-			io:format("De ~p: ~p - ~p = ~p~n", [From, X, Y, X - Y]),
+			io:format("De ~p: ~p + ~p = ~p~n", [From, X, Y, X - Y]),
 			From ! {result, X - Y},
 			subtracao()
 	end.
