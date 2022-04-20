@@ -1,5 +1,5 @@
 -module(calculadora).
--export([addition/0,subtraction/0, multiplication/0, division/0,interpret/1, compute/1, start/0, cls/0]).
+-export([adicao/0, subtracao/0, multiplicacao/0, divisao/0, interpretador/1, calcular/1, start/0, cls/0]).
 
 % Operações basicas da calculadora, cada uma será instanciada como um processo a parte.
 
@@ -10,98 +10,96 @@
 % 4. Envia uma mensagem para quem pediu a requisição com o resultado da operação;
 % 5. Recursão.
 
-addition() ->
-	io:format("O processo de adição foi iniciado.~n"),
+adicao() ->
+	io:format("O processo de adicao foi (Re)iniciado.~n"),
 	receive
 		{From, X, Y} ->
 			io:format("De ~p, ~p + ~p = ~p~n", [From, X, Y, X + Y]),
 			From ! {result, X + Y},
-			addition()
+			adicao()
 	end.
 
-subtraction() ->
-	io:format("O processo de subtração foi iniciado.~n"),
+subtracao() ->
+	io:format("O processo de subtracao foi (Re)iniciado.~n"),
 	receive
 		{From, X, Y} ->
 			io:format("De ~p: ~p - ~p = ~p~n", [From, X, Y, X - Y]),
 			From ! {result, X - Y},
-			subtraction()
+			subtracao()
 	end.
 
-multiplication() ->
-	io:format("O processo de multiplicação foi iniciado.~n"),
+multiplicacao() ->
+	io:format("O processo de multiplicacao foi (Re)iniciado.~n"),
 	receive
 		{From, X, Y} ->
 			io:format("De ~p: ~p * ~p = ~p~n", [From, X, Y, X * Y]),
 			From ! {result, X * Y},
-			multiplication()
+			multiplicacao()
 	end.
 
-division() ->
-	io:format("O processo de divisão foi iniciado.~n"),
+divisao() ->
+	io:format("O processo de divisao foi (Re)iniciado.~n"),
 	receive
 		{From, X, Y} ->
 			io:format("De ~p: ~p / ~p = ~p~n", [From, X, Y, X / Y]),
 			From ! {result, X / Y},
-			division()
+			divisao()
 	end.
 
-interpret(Expressao) -> interpret(Expressao, 0).
+interpretador(Expressao) -> interpretador(Expressao, 0).
 
-interpret([], Cache) -> Cache;
+interpretador([], Cache) -> Cache;
 
-interpret([Current | Rest], Buffer) ->
+interpretador([Atual | Rest], Cache) ->
 	if
-		[Current] == "0" ;
-		[Current] == "1" ;
-		[Current] == "2" ;
-		[Current] == "3" ;
-		[Current] == "4" ;
-		[Current] == "5" ;
-		[Current] == "6" ;
-		[Current] == "7" ;
-		[Current] == "8" ;
-		[Current] == "9" ->
-			Value = element(1, string:to_integer([Current])),
-			interpret(Rest, Buffer * 10 + Value);
-
-		[Current] == "+" ;
-		[Current] == "-" ;
-		[Current] == "*" ;
-		[Current] == "/" ->
-			Operator = list_to_atom([Current]),
-			SubExpression = interpret(Rest, 0),
-			{Operator, Buffer, SubExpression}
+		[Atual] == "0" ;
+		[Atual] == "1" ;
+		[Atual] == "2" ;
+		[Atual] == "3" ;
+		[Atual] == "4" ;
+		[Atual] == "5" ;
+		[Atual] == "6" ;
+		[Atual] == "7" ;
+		[Atual] == "8" ;
+		[Atual] == "9" -> Valor = element(1, string:to_integer([Atual])),
+			interpretador(Rest, Cache * 10 + Valor);
+		[Atual] == "+" ;
+		[Atual] == "-" ;
+		[Atual] == "*" ;
+		[Atual] == "/" ->
+			Operator = list_to_atom([Atual]),
+			SubExpression = interpretador(Rest, 0),
+			{Operator, Cache, SubExpression}
 	end.
 
-compute(Expressao) when 
+calcular(Expressao) when 
 	is_integer(Expressao) ; 
 	is_float(Expressao) ->
 		Expressao;
 
-compute(Expressao) when is_tuple(Expressao) ->
+calcular(Expressao) when is_tuple(Expressao) ->
 	case Expressao of
-		{'+', X, Y} ->
-			addition ! {self(), compute(X), compute(Y)};
-		{'-', X, Y} ->
-			subtraction ! {self(), compute(X), compute(Y)};
 		{'*', X, Y} ->
-			multiplication ! {self(), compute(X), compute(Y)};
+			multiplicacao ! {self(), calcular(X), calcular(Y)};
 		{'/', X, Y} ->
-			division ! {self(), compute(X), compute(Y)}
+			divisao ! {self(), calcular(X), calcular(Y)};
+		{'+', X, Y} ->
+			adicao ! {self(), calcular(X), calcular(Y)};
+		{'-', X, Y} ->
+			subtracao ! {self(), calcular(X), calcular(Y)}
 	end,
 
 	receive
-		{result, Value} ->
-			Value
+		{result, Valor} ->
+			Valor
 	end;
 
-compute(Expression) -> compute(interpret(Expression)).
+calcular(Expression) -> calcular(interpretador(Expression)).
 
 start() ->
-	register(addition, spawn(calculadora, addition, [])),
-	register(subtraction, spawn(calculadora, subtraction, [])),
-	register(multiplication, spawn(calculadora, multiplication, [])),
-	register(division, spawn(calculadora, division, [])).
+	register(adicao, spawn(calculadora, adicao, [])),
+	register(subtracao, spawn(calculadora, subtracao, [])),
+	register(multiplicacao, spawn(calculadora, multiplicacao, [])),
+	register(divisao, spawn(calculadora, divisao, [])).
 
 cls() -> io:format("\e[H\e[J").
