@@ -1,5 +1,5 @@
 -module(calculadora).
--export([adicao/0, subtracao/0, multiplicacao/0, divisao/0, interpretador/1, calcular/1, start/0, cls/0]).
+-export([adicao/0, subtracao/0, multiplicacao/0, divisao/0, interpretador/1, calcular/1, start/0]).
 
 % Operações basicas da calculadora, cada uma será instanciada como um processo a parte.
 
@@ -46,32 +46,35 @@ divisao() ->
 			divisao()
 	end.
 
+% O interpretador tem como objetivo interpretar a entrada que o usuario, saber se essa entrada
+% é um inteiro ou float ou se é uma subexpressão.
 interpretador(Expressao) -> interpretador(Expressao, 0).
 
+% Verifica se a expressão dada é vazia, caso seja ele apenas insere o valor do cache na subexpressão
 interpretador([], Cache) -> Cache;
 
+% Compara se os parametros são inteiros ou um operador
 interpretador([Atual | Rest], Cache) ->
 	if
-		[Atual] == "0" ;
-		[Atual] == "1" ;
-		[Atual] == "2" ;
-		[Atual] == "3" ;
-		[Atual] == "4" ;
-		[Atual] == "5" ;
-		[Atual] == "6" ;
-		[Atual] == "7" ;
-		[Atual] == "8" ;
-		[Atual] == "9" -> Valor = element(1, string:to_integer([Atual])),
+		[Atual] == "0" ;[Atual] == "1" ;[Atual] == "2" ;
+		[Atual] == "3" ;[Atual] == "4" ;[Atual] == "5" ;
+		[Atual] == "6" ;[Atual] == "7" ;[Atual] == "8" ;
+		[Atual] == "9" -> 
+			Valor = element(1, string:to_integer([Atual])),
 			interpretador(Rest, Cache * 10 + Valor);
+
 		[Atual] == "+" ;
 		[Atual] == "-" ;
 		[Atual] == "*" ;
 		[Atual] == "/" ->
 			Operator = list_to_atom([Atual]),
-			SubExpression = interpretador(Rest, 0),
+			SubExpression = interpretador(Rest, 0), 
 			{Operator, Cache, SubExpression}
 	end.
 
+% Calcular é quem vai fazer a chamada das operações em si, ele recebe a expressão e chama o interpretador 
+% e o mesmo diz para essa função se a expressão dada é um valor inteiro, float ou se ela é composta por n
+% subexpressões.
 calcular(Expressao) when 
 	is_integer(Expressao) ; 
 	is_float(Expressao) ->
@@ -96,10 +99,9 @@ calcular(Expressao) when is_tuple(Expressao) ->
 
 calcular(Expression) -> calcular(interpretador(Expression)).
 
+% Inicia todos os servidores e nomeia cada um para não precisar usar o valor do pid direto.
 start() ->
 	register(adicao, spawn(calculadora, adicao, [])),
 	register(subtracao, spawn(calculadora, subtracao, [])),
 	register(multiplicacao, spawn(calculadora, multiplicacao, [])),
 	register(divisao, spawn(calculadora, divisao, [])).
-
-cls() -> io:format("\e[H\e[J").
