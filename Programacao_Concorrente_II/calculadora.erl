@@ -48,28 +48,32 @@ divisao() ->
 
 % O interpretador tem como objetivo interpretar a entrada que o usuario, saber se essa entrada
 % é um inteiro ou float ou se é uma subexpressão.
-interpretador(Expressao) -> interpretador(Expressao, 0).
+interpretador(Expressao) -> interpretador(Expressao, 0, 1).
 
 % Verifica se a expressão dada é vazia, caso seja ele apenas insere o valor do cache na subexpressão
-interpretador([], Cache) -> Cache;
+interpretador([], Cache, Sinal) -> Cache * Sinal;
 
 % Compara se os parametros são inteiros ou um operador
-interpretador([Atual | Rest], Cache) ->
+interpretador([Atual | Rest], Cache, Sinal) ->
 	if
 		[Atual] == "0" ;[Atual] == "1" ;[Atual] == "2" ;
 		[Atual] == "3" ;[Atual] == "4" ;[Atual] == "5" ;
 		[Atual] == "6" ;[Atual] == "7" ;[Atual] == "8" ;
 		[Atual] == "9" -> 
 			Valor = element(1, string:to_integer([Atual])),
-			interpretador(Rest, Cache * 10 + Valor);
+			interpretador(Rest, Cache * 10 + Valor, Sinal);
 
 		[Atual] == "+" ;
-		[Atual] == "-" ;
 		[Atual] == "*" ;
 		[Atual] == "/" ->
 			Operator = list_to_atom([Atual]),
-			SubExpression = interpretador(Rest, 0), 
-			{Operator, Cache, SubExpression}
+			SubExpression = interpretador(Rest, 0, 1), 
+			{Operator, Cache * Sinal, SubExpression};
+
+		[Atual] == "-" ->
+			Operator = list_to_atom("+"),
+			SubExpression = interpretador(Rest, 0, -1), 
+			{Operator, Cache * Sinal, SubExpression}
 	end.
 
 % Calcular é quem vai fazer a chamada das operações em si, ele recebe a expressão e chama o interpretador 
