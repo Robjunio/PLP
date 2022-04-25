@@ -1,5 +1,5 @@
 
-package Classes;
+package ConceitosSimples;
 public class Animal {
 
     private String dieta;
