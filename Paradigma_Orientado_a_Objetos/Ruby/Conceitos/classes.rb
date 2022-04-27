@@ -1,7 +1,7 @@
 class Cachorro
 
   def initalize
-    puts puts "Meu nome é: Luke"
+    puts "Meu nome é: Luke"
   end
     def falar
      puts "Latir!"
