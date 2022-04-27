@@ -4,6 +4,9 @@
  */
 package AssociacaoAgregacaoComposicao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author ARKADE
@@ -15,7 +18,7 @@ public class Main {
         Professor prof = new Professor("Jucimar Jr");
         Estudante estudante = new Estudante("Marcos");
         
-        System.out.println(estudante.getNome() + "é estudante do professor"+prof.getNome());
+        System.out.println(estudante.getNome() + " é estudante do professor "+prof.getNome());
         
         
         // Agregação
@@ -30,12 +33,25 @@ public class Main {
         org.setNome("CEO BLA BLA BLA");
         org.setDept(dep);
           
-        System.out.println("O noem da CEO:"+org.getNome());        
-        System.out.println("O nome do departamento:"+dep.getNome());
-        System.out.println("Funcionario no departamento é" +anim2.getDieta());
-        System.out.println("Seu porte é: " +anim2.getPorte());
-        System.out.println("Sua categoria: " +anim2.getCategoria());
+        System.out.println("O noem da CEO: "+org.getNome());        
+        System.out.println("O nome do departamento: "+dep.getNome());
+        System.out.println("Funcionario no departamento " +dep.getNome()+ "é " +func.getNome());
         
+        
+        //Composição
+         Livro bookObj1 = new Livro("Java:A Beginner's Guide","Herbert Schildt");
+         Livro bookObj2 = new Livro("Core and Advanced Java", " Dreamtech Press");
+         Livro bookObj3 = new Livro("Head First Java", "Kathy Sierra");
+         List<Livro> books = new ArrayList<Livro>();
+         books.add(bookObj1);
+         books.add(bookObj2);
+         books.add(bookObj3);
+         Biblioteca library = new Biblioteca(books);
+         List<Livro> bks = library.totalDeLivros();
+         for(Livro bk : bks){
+             System.out.println("Title : " + bk.getTitulo() + " and "
+          +" Author : " + bk.getAutor());
+    }
         
     }
 }
