@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/ARKADE/Documents/GitHub/PLP/Paradigma_Orientado_a_Objetos/Java/src/Observer/weather/Subject.java</file>
+            <file>file:/C:/Users/ARKADE/Documents/GitHub/PLP/Paradigma_Orientado_a_Objetos/Java/src/Observer/weather/HeatIndexDisplay.java</file>
+            <file>file:/C:/Users/ARKADE/Documents/GitHub/PLP/Paradigma_Orientado_a_Objetos/Java/src/Observer/weather/WeatherStation.java</file>
+            <file>file:/C:/Users/ARKADE/Documents/GitHub/PLP/Paradigma_Orientado_a_Objetos/Java/src/Observer/weather/observable/WeatherStation.java</file>
+            <file>file:/C:/Users/ARKADE/Documents/GitHub/PLP/Paradigma_Orientado_a_Objetos/Java/src/Observer/weather/WeatherData.java</file>
+            <file>file:/C:/Users/ARKADE/Documents/GitHub/PLP/Paradigma_Orientado_a_Objetos/Java/src/Observer/weather/StatisticsDisplay.java</file>
+            <file>file:/C:/Users/ARKADE/Documents/GitHub/PLP/Paradigma_Orientado_a_Objetos/Java/src/Observer/weather/ObserverInterface.java</file>
+            <file>file:/C:/Users/ARKADE/Documents/GitHub/PLP/Paradigma_Orientado_a_Objetos/Java/src/Observer/weather/CurrentConditionsDisplay.java</file>
+            <file>file:/C:/Users/ARKADE/Documents/GitHub/PLP/Paradigma_Orientado_a_Objetos/Java/src/Observer/SwingObserverExample.java</file>
+            <file>file:/C:/Users/ARKADE/Documents/GitHub/PLP/Paradigma_Orientado_a_Objetos/Java/src/Observer/weather/ForecastDisplay.java</file>
+        </group>
+    </open-files>
+</project-private>
