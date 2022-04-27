@@ -1,5 +1,5 @@
 
 package Observer.weather;
-public interface Observer {
+public interface ObserverInterface {
   public void update(float temp, float humidity, float pressure);
 }

@@ -3,14 +3,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Observer.weather;
-public class CurrentConditionsDisplay implements Observer, DisplayElement {
+public class CurrentConditionsDisplay implements ObserverInterface, DisplayElement {
   private float temperature;
   private float humidity;
   private Subject weatherData;
   
   public CurrentConditionsDisplay(Subject weatherData) {
     this.weatherData = weatherData;
-    weatherData.registerObserver((java.util.Observer) this);
+    weatherData.registerObserver( this);
   }
   
   public void update(float temperature, float humidity, float pressure) {

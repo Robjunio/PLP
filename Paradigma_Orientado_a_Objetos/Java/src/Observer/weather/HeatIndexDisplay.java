@@ -3,13 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Observer.weather;
-public class HeatIndexDisplay implements Observer, DisplayElement {
+public class HeatIndexDisplay implements ObserverInterface, DisplayElement {
   float heatIndex = 0.0f;
   private Subject weatherData;
   
   public HeatIndexDisplay(Subject weatherData) {
     this.weatherData = weatherData;
-    weatherData.registerObserver((java.util.Observer) this);
+    weatherData.registerObserver( this);
   }
   
   public void update(float temperature, float humidity, float pressure) {
